@@ -1,0 +1,46 @@
+package com.kiran.java.JunitSamples;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import java.util.*;
+
+@SuppressWarnings("unused")
+
+@RunWith(Parameterized.class)
+public class StringHelperParameterizedTest {
+
+	StringHelper helper = new StringHelper();
+
+	private String input;
+	private String expectedOutput;
+	
+	
+	public StringHelperParameterizedTest(String input, String expectedOutput) {
+		super();
+		this.input = input;
+		this.expectedOutput = expectedOutput;
+	}
+
+	@Parameters
+	public static Collection<String[]> testCondition() {
+		String expectedOutputs[][] = { { "AACD", "CD" }, { "ACD", "CD" } };
+		return Arrays.asList(expectedOutputs);
+	}
+
+	@Test
+	public void testtruncateAInFirst2Positions1_AinFirst2Positions() {
+		assertEquals(expectedOutput, helper.truncateAInFirst2Positions(input));
+	}
+
+	@Test
+	public void testtruncateAInFirst2Positions2_AinFirst1Positions() {
+		assertEquals("CD", helper.truncateAInFirst2Positions("ACD"));
+	}
+
+}
